@@ -1,0 +1,156 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: #f7f4f1;
+  color: #1a1a1a;
+}
+
+.header {
+  background: #E8650A;
+  padding: 0 32px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+}
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: -8px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.marca-nombre {
+  font-size: 19px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.marca-frase {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.72);
+  letter-spacing: 0.08em;
+}
+
+.enlaces {
+  display: flex;
+  gap: 12px;
+  position: absolute; left: 50%; transform: translateX(-50%);
+}
+
+.enlace {
+  color: rgba(255,255,255,0.85);
+  font-size: 16px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.enlace.active {
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-weight: 500;
+}
+
+.enlace:hover {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.header-izq {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.usuario {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  border: 1.5px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  position: absolute; right: 32px;
+}
+
+.barra-superior {
+  background: #fff;
+  border-bottom: 0.5px solid #f0ece8;
+  padding: 0 32px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.notif {
+  font-size: 16px;
+  color: #888;
+}
+
+.inicio {
+    padding: 32px;
+}
+
+.seccion-viajes {
+    margin-bottom: 40px;
+}
+
+.titulo-seccion {
+    font-size: 38px;
+    margin-bottom: 24px;
+}
+
+.grid-viajes {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.nuevo-viaje {
+    width: 420px;
+    height: 120px;
+    border: 2px dashed #d8d8d8;
+    border-radius: 22px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.nuevo-viaje:hover {
+    background: rgba(232,101,10,0.03);
+    border-color: #E8650A;
+}
+
+.nuevo-icono {
+    height: 58px;
+    width: 58px;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    font-size: 48px;
+    color: #E8650A;
+}
+
+.linea-divisora {
+    height: 2px;
+    background: #dfdfdf;
+    margin: 50px 0;
+}

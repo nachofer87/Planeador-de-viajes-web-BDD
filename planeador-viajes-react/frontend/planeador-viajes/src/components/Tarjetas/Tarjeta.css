@@ -1,0 +1,54 @@
+.tarjeta-viaje {
+    width: 420px;
+    height: 120px;
+    background: #fff;
+    border-radius: 22px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    transition: 0.2s ease;
+}
+
+.tarjeta-viaje:hover {
+    transform: translateY(-4px);
+}
+
+.contenido-viaje {
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+.icono-transporte {
+    min-width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: #fff1e8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+.info-viaje {
+    flex: 1;
+}
+
+.nombre-viaje {
+    font-size: 28px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.fecha-viaje {
+    color: #666;
+    font-size: 18px;
+}
+
+.dias-restantes,
+.completado {
+    background: #f4f4f4;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 15px;
+}
