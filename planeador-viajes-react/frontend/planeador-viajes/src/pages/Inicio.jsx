@@ -3,44 +3,51 @@ import avion from "../assets/avion.png";
 import coche from "../assets/coche.png";
 
 import Tarjeta from "../components/Tarjetas/Tarjeta";
+import NuevoViaje from "../components/NuevoViaje/NuevoViaje";
 
-export default function Inicio() {
-  const proximosViajes = [
-    {
-      nombre: "París",
-      fecha: "12 - 20 dic 2026",
-      dias: "18 días",
-      icono: avion,
-    },
+import { useState } from "preact/hooks";
 
-    {
-      nombre: "Bariloche",
-      fecha: "5 - 12 ene 2027",
-      dias: "42 días",
-      icono: micro,
-    },
+function esPasado(fechaFinal) {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const [y, m, d] = fechaFinal.split("-");
+  const fin = new Date(y, m - 1, d);
+  return fin < hoy;
+}
 
-    {
-      nombre: "Costa Atlántica",
-      fecha: "15 - 19 feb 2027",
-      dias: "83 días",
-      icono: coche,
-    },
-  ];
+export default function Inicio({ viajes, setViajes }) {
+  const [formularioAbierto, setFormularioAbierto] = useState(false);
+  const [viajeEditando, setViajeEditando] = useState(null);
 
-  const viajesAnteriores = [
-    {
-      nombre: "Roma",
-      fecha: "10 - 17 oct 2023",
-      icono: avion,
-    },
+  const proximosViajes = viajes.filter(v => !esPasado(v.fechaFinal));
+  const viajesAnteriores = viajes.filter(v => esPasado(v.fechaFinal));
 
-    {
-      nombre: "Nueva York",
-      fecha: "2 - 9 ago 2023",
-      icono: avion,
-    },
-  ];
+  function abrirNuevo() {
+    setViajeEditando(null);
+    setFormularioAbierto(true);
+  }
+
+  function abrirEdicion(viaje) {
+    setViajeEditando(viaje);
+    setFormularioAbierto(true);
+  }
+
+  function cerrarModal() {
+    setFormularioAbierto(false);
+    setViajeEditando(null);
+  }
+
+  function agregarViaje(viajeNuevo) {
+    setViajes(prev => [...prev, viajeNuevo]);
+  }
+
+  function editarViaje(viajeActualizado) {
+    setViajes(prev => prev.map(v => v === viajeEditando ? viajeActualizado : v));
+  }
+
+  function borrarViaje() {
+    setViajes(prev => prev.filter(v => v !== viajeEditando));
+  }
 
   return (
     <main className="inicio">
@@ -50,24 +57,31 @@ export default function Inicio() {
         </h1>
 
         <div className="grid-viajes">
-          {
-            proximosViajes.map((viaje) => (
-              <Tarjeta
-                nombre={viaje.nombre}
-                fecha={viaje.fecha}
-                dias={viaje.dias}
-                icono={viaje.icono}
-              />
-            ))
-          }
+          {proximosViajes.map((viaje) => (
+            <Tarjeta
+              key={viaje.nombre}
+              nombre={viaje.nombre}
+              fecha={viaje.fechaFormateada}
+              dias={viaje.dias}
+              icono={viaje.icono}
+              onClick={() => abrirEdicion(viaje)}
+            />
+          ))}
 
-          <div className="nuevo-viaje">
-            <div className="nuevo-icono">
-              +
-            </div>
+          <div className="nuevo-viaje" onClick={abrirNuevo}>
+            <div className="nuevo-icono">+</div>
           </div>
         </div>
       </section>
+
+      <NuevoViaje
+        abierto={formularioAbierto}
+        cerrar={cerrarModal}
+        agregarViaje={agregarViaje}
+        viajeEditar={viajeEditando}
+        editarViaje={editarViaje}
+        borrarViaje={borrarViaje}
+      />
 
       <div className="linea-divisora"></div>
 
@@ -77,16 +91,15 @@ export default function Inicio() {
         </h2>
 
         <div className="grid-viajes">
-          {
-            viajesAnteriores.map((viaje) => (
-              <Tarjeta
-                nombre={viaje.nombre}
-                fecha={viaje.fecha}
-                icono={viaje.icono}
-                completado={true}
-              />
-            ))
-          }
+          {viajesAnteriores.map((viaje) => (
+            <Tarjeta
+              key={viaje.nombre}
+              nombre={viaje.nombre}
+              fecha={viaje.fechaFormateada}
+              icono={viaje.icono}
+              completado={true}
+            />
+          ))}
         </div>
       </section>
     </main>

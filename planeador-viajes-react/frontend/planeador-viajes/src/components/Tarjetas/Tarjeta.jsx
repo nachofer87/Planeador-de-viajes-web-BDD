@@ -6,9 +6,14 @@ export default function Tarjeta({
   dias,
   icono,
   completado = false,
+  onClick,
 }) {
     return (
-        <div className={`tarjeta-viaje ${completado ? "anterior" : ""}`}>
+        <div
+          className={`tarjeta-viaje ${completado ? "anterior" : ""}`}
+          onClick={onClick}
+          style={onClick ? { cursor: "pointer" } : undefined}
+        >
         <div className="contenido-viaje">
             <div className="icono-transporte">
                 <img
@@ -26,8 +31,8 @@ export default function Tarjeta({
             { completado ?(
                 <div className="completado"> Completado </div>
             ) : (
-                <div className="dias-restantes"> {dias} </div>
-            )}
+                <div className="dias-restantes"> {dias}  </div>
+            )} <br/>
         </div>
         </div>
     );
