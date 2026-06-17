@@ -1,8 +1,4 @@
-import micro from "../assets/micro.png";
-import avion from "../assets/avion.png";
-import coche from "../assets/coche.png";
-
-import Tarjeta from "../components/Tarjetas/Tarjeta";
+import Tarjeta   from "../components/Tarjetas/Tarjeta";
 import NuevoViaje from "../components/NuevoViaje/NuevoViaje";
 
 import { useState } from "preact/hooks";
@@ -11,16 +7,15 @@ function esPasado(fechaFinal) {
   const hoy = new Date();
   hoy.setHours(0, 0, 0, 0);
   const [y, m, d] = fechaFinal.split("-");
-  const fin = new Date(y, m - 1, d);
-  return fin < hoy;
+  return new Date(y, m - 1, d) < hoy;
 }
 
-export default function Inicio({ viajes, setViajes }) {
+export default function Inicio({ viajes, agregarViaje, editarViaje, borrarViaje }) {
   const [formularioAbierto, setFormularioAbierto] = useState(false);
-  const [viajeEditando, setViajeEditando] = useState(null);
+  const [viajeEditando,     setViajeEditando]     = useState(null);
 
-  const proximosViajes = viajes.filter(v => !esPasado(v.fechaFinal));
-  const viajesAnteriores = viajes.filter(v => esPasado(v.fechaFinal));
+  const proximosViajes   = viajes.filter(v => !esPasado(v.fechaFinal));
+  const viajesAnteriores = viajes.filter(v =>  esPasado(v.fechaFinal));
 
   function abrirNuevo() {
     setViajeEditando(null);
@@ -37,29 +32,23 @@ export default function Inicio({ viajes, setViajes }) {
     setViajeEditando(null);
   }
 
-  function agregarViaje(viajeNuevo) {
-    setViajes(prev => [...prev, viajeNuevo]);
+  function handleEditar(viajeActualizado) {
+    editarViaje(viajeActualizado, viajeEditando.id);
   }
 
-  function editarViaje(viajeActualizado) {
-    setViajes(prev => prev.map(v => v === viajeEditando ? viajeActualizado : v));
-  }
-
-  function borrarViaje() {
-    setViajes(prev => prev.filter(v => v !== viajeEditando));
+  function handleBorrar() {
+    borrarViaje(viajeEditando.id);
   }
 
   return (
     <main className="inicio">
       <section className="seccion-viajes">
-        <h1 className="titulo-seccion">
-          Próximos viajes
-        </h1>
+        <h1 className="titulo-seccion">Próximos viajes</h1>
 
         <div className="grid-viajes">
           {proximosViajes.map((viaje) => (
             <Tarjeta
-              key={viaje.nombre}
+              key={viaje.id}
               nombre={viaje.nombre}
               fecha={viaje.fechaFormateada}
               dias={viaje.dias}
@@ -79,21 +68,19 @@ export default function Inicio({ viajes, setViajes }) {
         cerrar={cerrarModal}
         agregarViaje={agregarViaje}
         viajeEditar={viajeEditando}
-        editarViaje={editarViaje}
-        borrarViaje={borrarViaje}
+        editarViaje={handleEditar}
+        borrarViaje={handleBorrar}
       />
 
       <div className="linea-divisora"></div>
 
       <section className="seccion-viajes">
-        <h2 className="titulo-seccion">
-          Viajes anteriores
-        </h2>
+        <h2 className="titulo-seccion">Viajes anteriores</h2>
 
         <div className="grid-viajes">
           {viajesAnteriores.map((viaje) => (
             <Tarjeta
-              key={viaje.nombre}
+              key={viaje.id}
               nombre={viaje.nombre}
               fecha={viaje.fechaFormateada}
               icono={viaje.icono}

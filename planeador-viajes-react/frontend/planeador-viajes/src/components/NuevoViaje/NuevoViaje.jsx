@@ -2,52 +2,18 @@ import "./NuevoViaje.css";
 
 import { useState, useEffect } from "preact/hooks";
 
-import avion from "../../assets/avion.png";
-import micro from "../../assets/micro.png";
-import coche from "../../assets/coche.png";
-
-function crearFechaLocal(fechaString) {
-  const [year, month, day] = fechaString.split("-");
-
-  return new Date(year, month - 1, day);
-}
-
-function calcularDiasRestantes(fechaInicio) {
-  const hoy = new Date();
-  const viaje = crearFechaLocal(fechaInicio);
-  hoy.setHours(0, 0, 0, 0);
-  viaje.setHours(0, 0, 0, 0);
-
-  const diferencia = viaje.getTime() - hoy.getTime();
-  const dias = Math.ceil(diferencia / (1000 * 60 * 60 * 24));
-    
-  return `${dias} días`;
-}
-
-function formatearFechas(fechaInicio, fechaFin) {
-  const inicio = crearFechaLocal(fechaInicio);
-  const fin = crearFechaLocal(fechaFin);
-
-  const mismoAnio = inicio.getFullYear() === fin.getFullYear();
-  const opcionesSinAnio = { day: "numeric", month: "short" };
-  const opcionesConAnio = { day: "numeric", month: "short", year: "numeric" };
-
-  const strInicio = inicio.toLocaleDateString(
-    "es-AR",
-    mismoAnio ? opcionesSinAnio : opcionesConAnio
-  );
-  const strFin = fin.toLocaleDateString("es-AR", opcionesConAnio);
-
-  return `${strInicio} - ${strFin}`;
-}
+import {
+  iconos,
+  crearFechaLocal,
+  calcularDiasRestantes,
+  formatearFechas,
+} from "../Viajes.jsx";
 
 function obtenerHoyISO() {
   return new Date(Date.now() - new Date().getTimezoneOffset() * 60000)
     .toISOString()
     .split("T")[0];
 }
-
-const iconos = { avion, micro, coche };
 
 export default function NuevoViaje({
   abierto,
@@ -57,10 +23,10 @@ export default function NuevoViaje({
   editarViaje,
   borrarViaje,
 }) {
-  const [nombre, setNombre] = useState("");
+  const [nombre,     setNombre]     = useState("");
   const [fechaInicio, setFechaInicio] = useState("");
-  const [fechaFinal, setFechaFinal] = useState("");
-  const [tipo, setTipo] = useState("");
+  const [fechaFinal,  setFechaFinal]  = useState("");
+  const [tipo,       setTipo]       = useState("");
 
   const modoEdicion = viajeEditar != null;
 
@@ -86,7 +52,7 @@ export default function NuevoViaje({
     setFechaFinal("");
     setTipo("");
   }
-  
+
   function cerrarYReset() {
     reset();
     cerrar();
@@ -94,18 +60,7 @@ export default function NuevoViaje({
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (!nombre.trim()) {
-        alert("El destino no puede estar vacío.");
-        return;
-    }
-    if (!fechaInicio || !fechaFinal) {
-        alert("Las fechas no pueden estar vacías.");
-        return;
-    }
-    if (!tipo) {
-        alert("Debe seleccionar un medio de transporte.");
-        return;
-    }
+    if (!nombre.trim() || !fechaInicio || !fechaFinal || !tipo) return;
 
     const viajeActualizado = {
       nombre,
@@ -113,8 +68,8 @@ export default function NuevoViaje({
       fechaInicio,
       fechaFinal,
       fechaFormateada: formatearFechas(fechaInicio, fechaFinal),
-      dias: calcularDiasRestantes(fechaInicio),
-      icono: iconos[tipo],
+      dias:            calcularDiasRestantes(fechaInicio),
+      icono:           iconos[tipo],
     };
 
     if (modoEdicion) {
@@ -139,7 +94,7 @@ export default function NuevoViaje({
         <h2 className="formulario-titulo">
           {modoEdicion ? "Editar viaje" : "Nuevo viaje"}
         </h2>
-        
+
         <form className="form" onSubmit={handleSubmit}>
           <input
             type="text"
@@ -149,7 +104,7 @@ export default function NuevoViaje({
           />
 
           <div className="fecha-grupo">
-            <label className="fecha-label">Fecha de inicio:</label> <br/> 
+            <label className="fecha-label">Fecha de inicio</label> <br/>
             <input
               type="date"
               value={fechaInicio}
@@ -157,9 +112,9 @@ export default function NuevoViaje({
               onInput={(e) => setFechaInicio(e.target.value)}
             />
           </div>
-          
+
           <div className="fecha-grupo">
-            <label className="fecha-label">Fecha de finalización:</label> <br/>
+            <label className="fecha-label">Fecha de finalización</label> <br/>
             <input
               type="date"
               value={fechaFinal}
@@ -167,7 +122,7 @@ export default function NuevoViaje({
               onInput={(e) => setFechaFinal(e.target.value)}
             />
           </div>
-          
+
           <div><label className="tipo-label">Medio de transporte:</label> <br/>
           <select
             className={"menu-des"}
@@ -182,20 +137,12 @@ export default function NuevoViaje({
           </div>
 
           <div className="acciones-formulario">
-            <button
-              type="button"
-              className="cancelar"
-              onClick={cerrarYReset}
-            >
+            <button type="button" className="cancelar" onClick={cerrarYReset}>
               Cancelar
             </button>
 
             {modoEdicion && (
-              <button
-                type="button"
-                className="eliminar"
-                onClick={handleBorrar}
-              >
+              <button type="button" className="eliminar" onClick={handleBorrar}>
                 Eliminar
               </button>
             )}
