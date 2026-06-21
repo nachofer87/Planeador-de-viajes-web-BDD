@@ -137,14 +137,10 @@ export default function NuevoViaje({
           </div>
 
           <div className="acciones-formulario">
-            <button type="button" className="cancelar" onClick={cerrarYReset}>
-              Cancelar
-            </button>
+            <button type="button" className="cancelar" onClick={cerrarYReset}> Cancelar </button>
 
             {modoEdicion && (
-              <button type="button" className="eliminar" onClick={handleBorrar}>
-                Eliminar
-              </button>
+              <button type="button" className="eliminar" onClick={handleBorrar}> Eliminar </button>
             )}
 
             <button type="submit" className="crear">

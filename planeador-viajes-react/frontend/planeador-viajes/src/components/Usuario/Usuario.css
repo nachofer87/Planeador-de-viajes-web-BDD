@@ -1,0 +1,139 @@
+.usuario-wrapper {
+  position: relative;
+}
+
+.usuario-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  transition: opacity 0.15s;
+}
+
+.usuario-btn:hover {
+  opacity: 0.75;
+}
+
+.usuario-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  background: white;
+  border-radius: 14px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  min-width: 175px;
+  z-index: 100;
+  animation: menu-aparecer 0.15s ease;
+}
+
+@keyframes menu-aparecer {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+.usuario-menu-item {
+  display: block;
+  width: 100%;
+  padding: 13px 18px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 14px;
+  color: #222;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.usuario-menu-item:hover {
+  background: #f5f5f5;
+}
+
+.usuario-menu-item + .usuario-menu-item {
+  border-top: 1px solid #f0f0f0;
+}
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.auth-card {
+  width: 420px;
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  animation: aparecer 0.2s ease;
+}
+
+@keyframes aparecer {
+  from { opacity: 0; transform: scale(0.95); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+.auth-titulo {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #111;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.auth-form input {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  height: 52px;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  padding: 0 16px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.auth-form input:focus {
+  border-color: #E8650A;
+}
+
+.auth-acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.auth-cancelar,
+.auth-submit {
+  height: 48px;
+  border: none;
+  border-radius: 12px;
+  padding: 0 22px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 500;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.auth-cancelar {
+  background: #efefef;
+  color: #333;
+}
+
+.auth-submit {
+  background: #E8650A;
+  color: white;
+}
