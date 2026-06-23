@@ -69,7 +69,7 @@ export default function Usuario() {
           onClick={() => setMenuAbierto(v => !v)}
           aria-label="Menú de usuario"
         >
-          <img src={"../../assets/usuario.png"} alt="Usuario" width="38" height="38" />
+          <img src={usuario} alt="Usuario" width="70" height="44" />
         </button>
 
         {menuAbierto && (

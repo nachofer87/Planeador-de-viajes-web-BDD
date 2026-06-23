@@ -28,7 +28,10 @@ export default function Planeador() {
             Personas
           </Link>
         </nav>
-        <Usuario />
+        
+        <nav className="user">
+          <Usuario/>
+        </nav>
       </header>
 
       <div className="barra-superior">

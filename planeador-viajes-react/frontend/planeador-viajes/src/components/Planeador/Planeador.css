@@ -16,6 +16,7 @@ body {
   height: 64px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .marca {
@@ -42,6 +43,13 @@ body {
   font-size: 10.5px;
   color: rgba(255,255,255,0.72);
   letter-spacing: 0.08em;
+}
+
+.user {
+  position: absolute;
+  right: 32px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .enlaces {
@@ -86,6 +94,7 @@ body {
 }
 
 .bar-sup-contenido {
+  display: flex;
   gap: 16px;
 }
 
