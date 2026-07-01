@@ -1,5 +1,6 @@
 .usuario-wrapper {
   position: relative;
+  margin-left: auto;
 }
 
 .usuario-btn {
@@ -128,12 +129,22 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.auth-cancelar {
-  background: #efefef;
-  color: #333;
+.auth-cancelar { background: #efefef; color: #333;  }
+.auth-submit   { background: #E8650A; color: white; }
+
+.auth-error {
+  background: #FCEBEB;
+  color: #A32D2D;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
 }
 
-.auth-submit {
-  background: #E8650A;
-  color: white;
+.usuario-menu-nombre {
+  padding: 12px 18px 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #555;
+  border-bottom: 1px solid #f0f0f0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }

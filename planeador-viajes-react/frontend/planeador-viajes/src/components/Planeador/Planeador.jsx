@@ -5,7 +5,7 @@ import Usuario from "../Usuario/Usuario.jsx";
 
 import { Link } from "preact-router/match";
 
-export default function Planeador() {
+export default function Planeador({ recordatorios = [] }) {
   return (
     <>
       <header className="header">
@@ -35,12 +35,21 @@ export default function Planeador() {
       </header>
 
       <div className="barra-superior">
-        <div className="bar-sup-contenido">
-          <span className="notif"> 1 recordatorio/s: </span>
-
-          <span className="notif"> París parte en 18 días </span>
+          <div className="bar-sup-contenido">
+            <span className="notif">
+              {recordatorios.length === 1 ? "1 recordatorio:" : `${recordatorios.length} recordatorios:`}
+            </span>
+            {recordatorios.map(v => (
+              <span key={v.nombre} className="notif">
+                {v.diasRestantes === 0
+                  ? `${v.nombre} parte hoy`
+                  : v.diasRestantes === 1
+                  ? `${v.nombre} parte mañana`
+                  : `${v.nombre} parte en ${v.diasRestantes} días`}
+              </span>
+            ))}
+          </div>
         </div>
-      </div>
     </>
   );
 }

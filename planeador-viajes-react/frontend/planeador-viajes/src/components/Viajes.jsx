@@ -29,7 +29,6 @@ export function formatearFechas(fechaInicio, fechaFin) {
   return `${strInicio} - ${strFin}`;
 }
 
-// Convierte una fila de MySQL (snake_case) al objeto que usa la app
 export function mapearViaje(fila) {
   return {
     id:              Number(fila.id),
